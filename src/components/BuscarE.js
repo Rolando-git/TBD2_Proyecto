@@ -91,6 +91,10 @@ const BuscarE = (params) => {
                                     <Button className="btn btn-warning" >Editar</Button>
                                 </Link>
                                 <text> </text>
+                                <Link to={`/PuestoT/${Empresa.cif}/${Empresa.nombre}`}>
+                                    <Button className="btn btn-secondary" >Crear Puesto</Button>
+                                </Link>
+                                <text> </text>
                                 <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button>
                             </td>
                         </tr>

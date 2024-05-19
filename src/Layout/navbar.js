@@ -4,7 +4,7 @@ import { Outlet, Link } from "react-router-dom"
 const NavBarExample = () => {
     return (
         <>
-            <Navbar expand="lg" bg="dark" data-bs-theme="dark" className="bg-body-tertiary">
+            <Navbar expand="lg" bg="dark" data-bs-theme="dark" sticky="top" className="bg-body-tertiary">
                 <Container>
                     <Navbar.Brand as={Link} to="/">Proyecto 1</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />

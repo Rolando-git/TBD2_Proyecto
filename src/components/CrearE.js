@@ -3,13 +3,16 @@ import "./CrearU.css";
 
 const CrearE = (params) => {
 
-    const { addEmpresa } = params
+    const { addEmpresa, busEmpr } = params
+    const [tituloA, setTituloA] = useState("Empresa agregada!")
     const [alerta, setAlerta] = useState(false)
     const [Empresa, setEmpresa] = useState({
         cif: "",
         nombre: "",
         correo: "",
-        telefono: ""
+        telefono: "",
+        direccion: "",
+        fecha_creacion: ""
     })
 
     const handleChange = ({ target }) => {
@@ -18,13 +21,21 @@ const CrearE = (params) => {
 
     const addEmpr = (e) => {
         e.preventDefault();
-        addEmpresa(Empresa)
-        setEmpresa({
-            cif: "",
-            nombre: "",
-            correo: "",
-            telefono: ""
-        })
+        const encontrado = busEmpr(Empresa.cif)
+        if (encontrado) {
+            setTituloA("Ya existe una Empresa con el mismo CIF!")
+        } else {
+            setTituloA("Empresa agregada!")
+            addEmpresa(Empresa)
+            setEmpresa({
+                cif: "",
+                nombre: "",
+                correo: "",
+                telefono: "",
+                direccion: "",
+                fecha_creacion: ""
+            })
+        }
         setAlerta(true)
     }
 
@@ -47,16 +58,23 @@ const CrearE = (params) => {
                 <h5 >Telefono</h5>
                 <input className="form-control" type="tel" name="telefono" placeholder="Telefono" value={Empresa.telefono} onChange={handleChange} required />
                 <br />
+                <h5 >Direccion</h5>
+                <input className="form-control" type="text" name="direccion" placeholder="Direccion" value={Empresa.direccion} onChange={handleChange} required />
+                <br />
+                <h5 >Fecha de Creacion</h5>
+                <input className="form-control" type="date" name="fecha_creacion" placeholder="Fecha de Creacion" value={Empresa.fecha_creacion} onChange={handleChange} required />
+                <br />
                 <input className="btn btn-primary" type="submit" value="Crear" />
+                {
+                    alerta &&
+                    <div className="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{tituloA}</strong>
+                        <button type="button" className="btn-close" onClick={() => setAlerta(false)} aria-label="Close"></button>
+                    </div>
+                }
             </form>
 
-            {
-                alerta &&
-                <div className="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Empresa agregada!</strong>
-                    <button type="button" className="btn-close" onClick={() => setAlerta(false)} aria-label="Close"></button>
-                </div>
-            }
+
         </div>
     );
 };

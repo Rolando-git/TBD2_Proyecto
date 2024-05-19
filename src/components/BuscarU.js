@@ -84,10 +84,14 @@ const BuscarU = (params) => {
                             <th scope="row">{usuario.dni}</th>
                             <td>{usuario.nombre}</td>
                             <td>{usuario.apellido}</td>
-                            <td>97315378</td>
+                            <td>{usuario.celular}</td>
                             <td>
                                 <Link to={`/EditarU/${usuario.dni}`}>
                                     <Button className="btn btn-warning" >Editar</Button>
+                                </Link>
+                                <text> </text>
+                                <Link to={`/SoliEmpleo/${usuario.dni}/${usuario.nombre}`}>
+                                    <Button className="btn btn-primary" >Solicitar Empleo</Button>
                                 </Link>
                                 <text> </text>
                                 <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button>

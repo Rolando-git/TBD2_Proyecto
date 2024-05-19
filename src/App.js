@@ -9,10 +9,17 @@ import NavBarExample from './Layout/navbar';
 import EditarU from './components/EditarU';
 import CrearE from './components/CrearE';
 import BuscarE from './components/BuscarE';
+import PuestoT from './components/PuestoT';
+import SoliEmpleo from './components/SoliEmpleo';
 
 function App() {
   const [solicitantes, setSolicitantes] = useState([]);
   const [Empresas, setEmpresas] = useState([]);
+  const [Puestos, setPuestos] = useState([]);
+
+  const addPuesto = (usua) => {
+    setPuestos([...Puestos, usua])
+  }
 
   const addSolicitante = (usua) => {
     setSolicitantes([...solicitantes, usua])
@@ -56,13 +63,17 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<NavBarExample />}>
-            <Route index element={<Home empresas={Empresas} solicitantes={solicitantes}/>} />
-            <Route path='CrearU' element={<CrearU addSoli={addSolicitante} />} />
+            <Route index element={<Home empresas={Empresas} solicitantes={solicitantes} puestos={Puestos}/>} />
+            <Route path='CrearU' element={<CrearU addSoli={addSolicitante} busSoli={buscarSolicitante} />} />
             <Route path='BuscarU' element={<BuscarU busSoli={buscarSolicitante} elimSoli={elimSolicitante} />} />
             <Route path='EditarU/:idusuario' element={<EditarU addSoli={addSolicitante} busSoli={buscarSolicitante} elimSoli={elimSolicitante} />} />
 
-            <Route path='CrearE' element={<CrearE addEmpresa={addEmpresa} />} />
+            <Route path='CrearE' element={<CrearE addEmpresa={addEmpresa} busEmpr={buscarEmpresa} />} />
             <Route path='BuscarE' element={<BuscarE busEmpr={buscarEmpresa} elimEmpr={elimEmpresa} />} />
+
+            <Route path='SoliEmpleo/:idSolici/:nombreSolici' element={<SoliEmpleo puestos={Puestos}/>} />
+      
+            <Route path='PuestoT/:cifEmpresa/:nombreEmpresa' element={<PuestoT addPuesto={addPuesto}/>} />
             <Route path='*' element={<Navigate replace to={"/"} />} />
           </Route>
         </Routes>
