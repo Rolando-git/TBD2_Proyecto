@@ -87,12 +87,16 @@ const BuscarE = (params) => {
                             <td>{Empresa.correo}</td>
                             <td>{Empresa.telefono}</td>
                             <td>
-                                <Link to={`/EditarU/${Empresa.cif}`}>
+                                <Link to={`/EditarE/${Empresa.cif}`}>
                                     <Button className="btn btn-warning" >Editar</Button>
                                 </Link>
                                 <text> </text>
                                 <Link to={`/PuestoT/${Empresa.cif}/${Empresa.nombre}`}>
                                     <Button className="btn btn-secondary" >Crear Puesto</Button>
+                                </Link>
+                                <text> </text>
+                                <Link to={`/EmprEmpleo/${Empresa.cif}`}>
+                                    <Button className="btn btn-info" >Buscar Empleados</Button>
                                 </Link>
                                 <text> </text>
                                 <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button>

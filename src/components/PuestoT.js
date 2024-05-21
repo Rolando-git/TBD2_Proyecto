@@ -56,7 +56,7 @@ const PuestoT = (params) => {
                 <input className="form-control" type="number" name="sueldo" placeholder="Sueldo" value={puestoTrabajo.sueldo} onChange={handleChange} required />
                 <br />
                 <h5 >Tipo de Contrato</h5>
-                <select id="tipo_contrato" name="tipo_contrato" required>
+                <select id="tipo_contrato" name="tipo_contrato" value={puestoTrabajo.tipo_contrato} onChange={handleChange} required>
                     <option value="">Seleccione...</option>
                     <option value="Tiempo completo">Tiempo completo</option>
                     <option value="Tiempo parcial">Tiempo parcial</option>

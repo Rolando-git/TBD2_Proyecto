@@ -2,35 +2,38 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 const SoliEmpleo = (params) => {
-    const { puestos } = params
+    const { puestos, buscarSolici,adsolicitud,actualizarSolicitud } = params
     const { idSolici, nombreSolici } = useParams()
 
+    const solicitante = buscarSolici(idSolici)
+// FALTA EL UPDATE CUANDO PARA PONER FALSE EN LA SOLICITUD DEL SOLICITANTE
     const [empleo, SetEmpleo] = useState({
-        idEmp: Date.now,
-        idSolicitante: { idSolici },
-        nombreSolicitante: { nombreSolici },
-        nombreEmpr: ""
+        idEmp: "",
+        idSolicitante: "",
+        nombreSolicitante: "",
+        nombreEmpr: "",
+        accion: ""
     })
 
-    const [selectedJob, setSelectedJob] = useState(null);
-
-    const handleButtonClick = (job) => {
-        setSelectedJob(job);
-        saveEmp()
-    };
-
-    const saveEmp = () => {
-        SetEmpleo({
-            ...empleo,nombreEmpr: selectedJob.nombre_empresa
-        })
+    const saveEmp = (elementoN) => {
+        const empleoE = {
+            idEmp: Date.now(),
+            idSolicitante: idSolici ,
+            nombreSolicitante: nombreSolici ,
+            nombreEmpr: elementoN,
+            accion: "Solicitante Envio Curriculum"
+        }
+        SetEmpleo(empleoE)
+        actualizarSolicitud(idSolici)
+        adsolicitud(empleoE)
     }
 
     return (
         <div className="container w-75">
-            <div  className=" shadow rounded p-3">
-            <h3>{nombreSolici}</h3>
+            <div className=" shadow rounded p-3">
+                <h3>({idSolici}) {nombreSolici}</h3>
             </div>
-            <br/><br/><br/>
+            <br /><br /><br />
             <table className="table">
                 <thead>
                     <tr>
@@ -52,7 +55,8 @@ const SoliEmpleo = (params) => {
                             <td >{elemento.sueldo}</td>
                             <td >{elemento.tipo_contrato}</td>
                             <td>
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal" onClick={() => handleButtonClick(elemento)} data-bs-target="#staticBackdrop">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"  onClick={() => saveEmp(elemento.nombre_empresa)} 
+                                data-bs-target="#staticBackdrop" disabled={solicitante.solicitud !== true ? "" : "disabled"}>
                                     Enviar Curriculum
                                 </button>
                             </td>
@@ -67,7 +71,7 @@ const SoliEmpleo = (params) => {
                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Curriculum Enviado!</h1>
                             </div>
                             <div class="modal-body">
-                                Numero de solicitud {empleo.idEmp }
+                                Numero de solicitud {empleo.idEmp}
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>

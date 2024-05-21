@@ -26,6 +26,7 @@ const CrearU = (params) => {
         estadoC: "",
         antecedentes: "",
         servicioM: "",
+                solicitud: false
     })
 
 
@@ -61,6 +62,7 @@ const CrearU = (params) => {
                 estadoC: "",
                 antecedentes: "",
                 servicioM: "",
+                solicitud: false
             })
         }
         setAlerta(true)
@@ -105,7 +107,7 @@ const CrearU = (params) => {
                             <div style={{ display: "flex" }}>
                                 <div style={{ flex: "1", marginRight: "10px" }}>
                                     <h5 >Género*</h5>
-                                    <select id="genero" name="genero" value={solicitante.genero} onChange={handleChange} required>
+                                    <select name="genero" value={solicitante.genero} onChange={handleChange} required>
                                         <option value="Masculino">Masculino</option>
                                         <option value="Femenino">Femenino</option>
                                     </select>
@@ -151,7 +153,6 @@ const CrearU = (params) => {
                         <br />
                         <div className=" shadow rounded p-3">
                             <h4>DATOS LEGALES</h4>
-                            estado civil
                             <h5 >Estado Civil</h5>
                             <select name="estadoC" value={solicitante.estadoC} onChange={handleChange} required>
                                 <option value="Soltero/a">Soltero/a</option>
