@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./CrearU.css";
+import {firestore} from "../firebase";
+import { addDoc, collection } from "@firebase/firestore";
 
+
+const ref = collection(firestore, "handlechange");
 const CrearU = (params) => {
 
     const { addSoli, busSoli } = params
@@ -42,6 +46,11 @@ const CrearU = (params) => {
         } else {
             setTituloA("Solicitante agregado!")
             addSoli(solicitante)
+            try {
+                addDoc(ref, solicitante);
+            } catch(e){
+                console.log(e);
+            }
             setSolicitante({
                 dni: '',
                 nombre: "",
